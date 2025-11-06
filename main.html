@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wniosek o Potwierdzenie Niekaralności - Summer RP</title>
+    <style>
+        /* --- Zmienne Kolorów dla Motywu JASNEGO --- */
+        :root {
+            --primary-blue: #007bff;
+            --background-body: #f4f4f9;
+            --background-container: #ffffff;
+            --text-color: #333;
+            --hr-color: #eee;
+        }
+
+        /* --- Zmienne Kolorów dla Motywu CIEMNEGO --- */
+        .dark-mode {
+            --primary-blue: #3498db;
+            --background-body: #2c3e50;
+            --background-container: #34495e;
+            --text-color: #ecf0f1;
+            --hr-color: #4a637d;
+        }
+
+        /* --- Globalne style --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-body);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s, color 0.3s;
+            
+            /* Znak Wodny: "Summer RP" (dla jasnego motywu) */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100%" width="100%"><text x="50%" y="50%" fill="%23000000" fill-opacity="0.05" transform="rotate(-45 50 50)" text-anchor="middle" font-size="60px" font-weight="bold">Summer RP</text></svg>');
+            background-repeat: repeat;
+        }
+        
+        /* Znak Wodny dla ciemnego motywu (ciemniejszy tekst) */
+        .dark-mode body {
+             background-image: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100%" width="100%"><text x="50%" y="50%" fill="%23FFFFFF" fill-opacity="0.08" transform="rotate(-45 50 50)" text-anchor="middle" font-size="60px" font-weight="bold">Summer RP</text></svg>');
+        }
+
+        .container {
+            background-color: var(--background-container);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 550px;
+            border-top: 5px solid var(--primary-blue);
+            transition: background-color 0.3s, box-shadow 0.3s;
+            position: relative; /* Dla przycisku motywu */
+        }
+        
+        /* Styl dla napisu "Summer RP" na stronie */
+        .server-title {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--hr-color);
+            padding-bottom: 10px;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid var(--hr-color);
+            border-radius: 6px;
+            box-sizing: border-box;
+            background-color: var(--background-container);
+            color: var(--text-color);
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+        }
+        
+        input[type="text"]:focus,
+        input[type="date"]:focus,
+        textarea:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 17px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-1px);
+        }
+        
+        button:disabled {
+            background-color: #adb5bd;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* --- Przełącznik Motywu --- */
+        .theme-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            font-size: 24px;
+            line-height: 1;
+            z-index: 10;
+            color: var(--primary-blue);
+        }
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+        
+        /* Komunikaty (bez zmian) */
+        #message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 6px;
+            display: none;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+    </style>
+</head>
+<body class="light-mode">
+    <div class="container">
+        
+        <span class="theme-toggle" id="theme-toggle" title="Przełącz motyw">
+            ☀️
+        </span>
+
+        <div class="server-title">Summer RP</div>
+
+        <h1>📑 Wniosek o Potwierdzenie Niekaralności</h1>
+        <p>Prosimy o wypełnienie poniższego formularza. Nick Discord jest zbierany w celu weryfikacji tożsamości gracza.</p>
+
+        <form id="criminalRecordForm">
+            <label for="discord_nick">Nick Discord:</label>
+            <input type="text" id="discord_nick" name="discord_nick" placeholder="Np. JanKowalski#1234" required>
+
+            <hr style="border-top: 1px solid var(--hr-color); margin: 25px 0;">
+
+            <label for="ic_name">Imię:</label>
+            <input type="text" id="ic_name" name="ic_name" placeholder="Imię postaci" required>
+
+            <label for="ic_surname">Nazwisko:</label>
+            <input type="text" id="ic_surname" name="ic_surname" placeholder="Nazwisko postaci" required>
+
+            <label for="date_of_birth">Data urodzenia:</label>
+            <input type="date" id="date_of_birth" name="date_of_birth" required>
+
+            <label for="reason">Cel lub powód ubiegania się o dokument:</label>
+            <textarea id="reason" name="reason" placeholder="Np. Ubiegam się o licencję na broń, Staram się o pracę w LSPD, Wymagane przez pracodawcę." required></textarea>
+
+            <button type="submit" id="submitBtn">Wyślij Wniosek</button>
+        </form>
+
+        <div id="message" role="alert"></div>
+
+        <p style="text-align: center; margin-top: 25px; font-size: 0.9em; color: #666;">
+            🕒 **Informacja:** Po wysłaniu wniosku, czas oczekiwania na weryfikację i odpowiedź wynosi **do 12 godzin**.
+        </p>
+    </div>
+
+    <script>
+        // --- FUNKCJA OBSŁUGUJĄCA MOTYWY ---
+        const toggleButton = document.getElementById('theme-toggle');
+        const body = document.body;
+        const localStorageKey = 'summerRpTheme';
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                toggleButton.textContent = '🌙'; // Księżyc dla ciemnego motywu
+                localStorage.setItem(localStorageKey, 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                toggleButton.textContent = '☀️'; // Słońce dla jasnego motywu
+                localStorage.setItem(localStorageKey, 'light');
+            }
+        }
+
+        // Ładowanie motywu z localStorage po załadowaniu strony
+        const savedTheme = localStorage.getItem(localStorageKey);
+        if (savedTheme === 'dark') {
+            applyTheme(true);
+        } else {
+            applyTheme(false);
+        }
+
+        // Przełączanie motywu po kliknięciu
+        toggleButton.addEventListener('click', () => {
+            const isDark = body.classList.contains('dark-mode');
+            applyTheme(!isDark);
+        });
+        
+        // --- FUNKCJA OBSŁUGUJĄCA WYSYŁANIE WEBHOOKA ---
+        document.getElementById('criminalRecordForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const form = event.target;
+            const messageDiv = document.getElementById('message');
+            const submitBtn = document.getElementById('submitBtn');
+
+            // Webhook URL: Twój adres jest tutaj.
+            const webhookPart1 = "https://discord.com/api/webhooks/1436076640403984417";
+            const webhookPart2 = "/RgIvY87Cj2Nier35Icwb82UqRFbdi6hvx_ICrhknWsWdxQEp8BYeDtUftwPN_jVzZ1yW";
+            const webhookURL = webhookPart1 + webhookPart2;
+
+            // Pobieranie danych
+            const discordNick = form.elements['discord_nick'].value;
+            const icName = form.elements['ic_name'].value;
+            const icSurname = form.elements['ic_surname'].value;
+            const dateOfBirth = form.elements['date_of_birth'].value;
+            const reason = form.elements['reason'].value;
+
+            // Tworzenie obiektu danych dla Discord (Embed)
+            const payload = {
+                username: null,
+                avatar_url: null,
+                embeds: [{
+                    title: `📑 Summer RP - Wniosek o Potwierdzenie Niekaralności`,
+                    description: `**Wysłane przez gracza:** ${discordNick}`,
+                    color: 3851088, 
+                    author: {
+                        name: "Summer RP",
+                    },
+                    fields: [
+                        {
+                            name: "Imię i Nazwisko",
+                            value: `${icName} ${icSurname}`,
+                            inline: true
+                        },
+                        {
+                            name: "Data Urodzenia",
+                            value: dateOfBirth,
+                            inline: true
+                        },
+                        {
+                            name: "Cel/Powód ubiegania się",
+                            value: reason,
+                            inline: false
+                        },
+                        {
+                            name: "Status",
+                            value: "Oczekujący na weryfikację. Czas oczekiwania: do 12 godzin.",
+                            inline: false
+                        }
+                    ],
+                    timestamp: new Date().toISOString(),
+                    footer: {
+                        text: "Wniosek automatycznie wygenerowany ze strony Summer RP"
+                    }
+                }]
+            };
+
+            // Wysyłka danych
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Wysyłanie... Proszę czekać.';
+            messageDiv.style.display = 'none';
+
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            })
+            .then(response => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Wyślij Wniosek';
+
+                if (response.ok) {
+                    messageDiv.classList.remove('error');
+                    messageDiv.classList.add('success');
+                    messageDiv.innerHTML = '✅ Wniosek wysłany pomyślnie! Twoje dane zostały przyjęte do weryfikacji. Czas oczekiwania to do 12 godzin.'
+                    form.reset();
+                } else {
+                    console.error('Błąd wysyłania do Discorda:', response.status, response.statusText);
+                    messageDiv.classList.remove('success');
+                    messageDiv.classList.add('error');
+                    messageDiv.innerHTML = '❌ Wystąpił błąd podczas wysyłania wniosku (Kod błędu: ' + response.status + '). Sprawdź, czy webhook jest aktywny.'
+                }
+            })
+            .catch(error => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Wyślij Wniosek';
+                messageDiv.classList.remove('success');
+                messageDiv.classList.add('error');
+                messageDiv.innerHTML = '❌ Wystąpił błąd sieci. Spróbuj ponownie.';
+            })
+            .finally(() => {
+                messageDiv.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
