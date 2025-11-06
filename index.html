@@ -195,11 +195,14 @@
             <label for="ic_surname">Nazwisko:</label>
             <input type="text" id="ic_surname" name="ic_surname" placeholder="Nazwisko postaci" required>
 
+            <label for="pesel">PESEL (ID Roblox):</label>
+            <input type="text" id="pesel" name="pesel" placeholder="Wprowadź ID Roblox (cyfry)" required>
+
             <label for="date_of_birth">Data urodzenia:</label>
             <input type="date" id="date_of_birth" name="date_of_birth" required>
 
             <label for="reason">Cel lub powód ubiegania się o dokument:</label>
-            <textarea id="reason" name="reason" placeholder="Np. Ubiegam się o licencję na broń, Staram się o pracę w LSPD, Wymagane przez pracodawcę." required></textarea>
+            <textarea id="reason" name="reason" placeholder="Np. Ubiegam się o licencję na broń, Staram się o pracę w policji, Wymagane przez pracodawcę." required></textarea>
 
             <button type="submit" id="submitBtn">Wyślij Wniosek</button>
         </form>
@@ -260,6 +263,8 @@
             const discordNick = form.elements['discord_nick'].value;
             const icName = form.elements['ic_name'].value;
             const icSurname = form.elements['ic_surname'].value;
+            // POBRANIE NOWEGO POLA PESEL
+            const pesel = form.elements['pesel'].value; 
             const dateOfBirth = form.elements['date_of_birth'].value;
             const reason = form.elements['reason'].value;
 
@@ -281,6 +286,11 @@
                             inline: true
                         },
                         {
+                            name: "PESEL (ID Roblox)",
+                            value: `\`${pesel}\``, // Wypisanie ID w kodzie
+                            inline: true
+                        },
+                         {
                             name: "Data Urodzenia",
                             value: dateOfBirth,
                             inline: true
