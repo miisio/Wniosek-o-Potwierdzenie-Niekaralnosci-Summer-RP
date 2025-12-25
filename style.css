@@ -1,37 +1,135 @@
+:root {
+    --gov-red: #d00000;
+    --gov-bg: #ffffff;
+    --gov-border: #c4c4c4;
+    --gov-text: #1c1c1c;
+    --gov-muted: #555555;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background:#0b0e13;
-    font-family:Segoe UI,sans-serif;
-    color:#eaeaf0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
+    margin: 0;
+    padding: 40px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--gov-bg);
+    color: var(--gov-text);
 }
 
 .container {
-    background:#121722;
-    padding:30px;
-    border-radius:15px;
-    width:420px;
-    box-shadow:0 0 40px rgba(0,0,0,.6);
+    max-width: 720px;
+    margin: auto;
+    background: #ffffff;
+    border: 1px solid var(--gov-border);
+    padding: 40px 50px 50px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-input, textarea, button {
-    width:100%;
-    margin-bottom:15px;
-    padding:12px;
-    border-radius:8px;
-    border:none;
+/* ===== NAGŁÓWEK ===== */
+.gov-header {
+    border-bottom: 4px solid var(--gov-red);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+.gov-header h1 {
+    font-size: 24px;
+    margin: 0;
+    color: var(--gov-red);
+    font-weight: bold;
+}
+
+.gov-header .subtitle {
+    font-size: 14px;
+    color: var(--gov-muted);
+    margin-top: 5px;
+}
+
+/* ===== FORMULARZ ===== */
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
 }
 
 input, textarea {
-    background:#0e1320;
-    color:#fff;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border: 1px solid var(--gov-border);
+    border-radius: 4px;
+    background: #ffffff;
+    color: var(--gov-text);
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gov-red);
+    box-shadow: 0 0 0 2px rgba(208,0,0,0.15);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--gov-border);
+    margin: 30px 0;
 }
 
 button {
-    background:#0d6efd;
-    color:#fff;
-    font-weight:bold;
-    cursor:pointer;
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    background: var(--gov-red);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+button:hover {
+    background: #a50000;
+}
+
+button:disabled {
+    background: #bfbfbf;
+    cursor: not-allowed;
+}
+
+/* ===== KOMUNIKATY ===== */
+#message {
+    margin-top: 25px;
+    padding: 15px;
+    border: 1px solid;
+    font-size: 14px;
+    display: none;
+}
+
+.success {
+    background: #f8f8f8;
+    border-color: #a5d6a7;
+    color: #1b5e20;
+}
+
+.error {
+    background: #fef6f6;
+    border-color: #f08080;
+    color: #b71c1c;
+}
+
+/* ===== STOPKA INFORMACYJNA ===== */
+.footer-info {
+    margin-top: 30px;
+    font-size: 13px;
+    color: var(--gov-muted);
+    text-align: center;
 }
