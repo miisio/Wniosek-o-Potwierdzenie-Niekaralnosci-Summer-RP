@@ -7,169 +7,136 @@
     <link rel="icon" href="https://media.discordapp.net/attachments/1396419876989435904/1438248669144154122/logo_strona.png?ex=691630f4&is=6914df74&hm=2f32b1a29d8ea01f160a4bc7088a5ff5d1b00a25192a059772e98e649ced1824&=&format=webp&quality=lossless&width=640&height=640" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* --- Zmienne Kolorów dla Motywu JASNEGO --- */
-        :root {
-            --primary-blue: #007bff;
-            --background-body: #f4f4f9;
-            --background-container: #ffffff;
-            --text-color: #333;
-            --hr-color: #eee;
-        }
+:root {
+    --primary: #0d6efd;
+    --bg: #0b0e13;
+    --card: #121722;
+    --text: #eaeaf0;
+    --muted: #9aa4b2;
+    --border: #1e2433;
+}
 
-        /* --- Zmienne Kolorów dla Motywu CIEMNEGO --- */
-        .dark-mode {
-            --primary-blue: #3498db;
-            --background-body: #2c3e50;
-            --background-container: #34495e;
-            --text-color: #ecf0f1;
-            --hr-color: #4a637d;
-        }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 
-        /* --- Globalne style --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-body);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            transition: background-color 0.3s, color 0.3s;
-            
-            /* Znak Wodny: "Summer RP" (dla jasnego motywu) */
-            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100%" width="100%"><text x="50%" y="50%" fill="%23000000" fill-opacity="0.05" transform="rotate(-45 50 50)" text-anchor="middle" font-size="60px" font-weight="bold">Summer RP</text></svg>');
-            background-repeat: repeat;
-        }
-        
-        /* Znak Wodny dla ciemnego motywu (ciemniejszy tekst) */
-        .dark-mode body {
-             background-image: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.8)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="100%" width="100%"><text x="50%" y="50%" fill="%23FFFFFF" fill-opacity="0.08" transform="rotate(-45 50 50)" text-anchor="middle" font-size="60px" font-weight="bold">Summer RP</text></svg>');
-        }
+    background-image:
+        linear-gradient(rgba(11,14,19,0.92), rgba(11,14,19,0.92)),
+        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><text x="50%" y="50%" fill="%23ffffff" fill-opacity="0.03" transform="rotate(-45 50 50)" text-anchor="middle" font-size="60" font-weight="bold">Summer RP</text></svg>');
+}
 
-        .container {
-            background-color: var(--background-container);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            width: 100%;
-            max-width: 550px;
-            border-top: 5px solid var(--primary-blue);
-            transition: background-color 0.3s, box-shadow 0.3s;
-            position: relative; /* Dla przycisku motywu */
-        }
-        
-        /* Styl dla napisu "Summer RP" na stronie */
-        .server-title {
-            text-align: center;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: var(--primary-blue);
-            margin-bottom: 20px;
-        }
+.container {
+    background: var(--card);
+    padding: 36px;
+    border-radius: 18px;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+    border-top: 5px solid var(--primary);
+}
 
-        h1 {
-            color: var(--primary-blue);
-            text-align: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid var(--hr-color);
-            padding-bottom: 10px;
-            transition: color 0.3s, border-bottom 0.3s;
-        }
+.server-title {
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
 
-        input[type="text"],
-        input[type="date"],
-        textarea {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid var(--hr-color);
-            border-radius: 6px;
-            box-sizing: border-box;
-            background-color: var(--background-container);
-            color: var(--text-color);
-            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-        }
-        
-        input[type="text"]:focus,
-        input[type="date"]:focus,
-        textarea:focus {
-            border-color: var(--primary-blue);
-            outline: none;
-        }
+p {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 30px;
+}
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+}
 
-        button {
-            background-color: var(--primary-blue);
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 17px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-        }
+input, textarea {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #0e1320;
+    color: var(--text);
+    font-size: 15px;
+}
 
-        button:hover {
-            background-color: #0056b3;
-            transform: translateY(-1px);
-        }
-        
-        button:disabled {
-            background-color: #adb5bd;
-            cursor: not-allowed;
-            transform: none;
-        }
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.25);
+}
 
-        /* --- Przełącznik Motywu --- */
-        .theme-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            cursor: pointer;
-            font-size: 24px;
-            line-height: 1;
-            z-index: 10;
-            color: var(--primary-blue);
-        }
-        .theme-toggle:hover {
-            opacity: 0.8;
-        }
-        
-        /* Komunikaty (bez zmian) */
-        #message {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 6px;
-            display: none;
-            font-weight: bold;
-            text-align: center;
-        }
+textarea {
+    min-height: 120px;
+}
 
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
+hr {
+    border: none;
+    height: 1px;
+    background: var(--border);
+    margin: 30px 0;
+}
 
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
+button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #0d6efd, #084298);
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 25px rgba(13,110,253,0.45);
+}
+
+button:disabled {
+    background: #444;
+    cursor: not-allowed;
+}
+
+#message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.success {
+    background: #143d2a;
+    color: #7dffb3;
+}
+
+.error {
+    background: #3a1418;
+    color: #ff9aa2;
+}
 
     </style>
 </head>
