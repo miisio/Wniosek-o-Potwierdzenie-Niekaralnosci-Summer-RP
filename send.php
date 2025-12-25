@@ -1,48 +1,27 @@
 <?php
 header('Content-Type: application/json');
 
-// Pobranie danych POST
-$data = json_decode(file_get_contents('php://input'), true);
+// Jeśli potrzebujesz CORS (np. fetch z innej domeny)
+// header("Access-Control-Allow-Origin: *");
+// header("Access-Control-Allow-Methods: POST");
+// header("Access-Control-Allow-Headers: Content-Type");
+
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
 
 if (!$data) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Brak danych']);
+    echo json_encode(['success' => false, 'error' => 'Brak danych lub niepoprawny JSON']);
     exit;
 }
 
-// Twój webhook (Tylko na serwerze, NIE w JS)
-$webhook = 'https://discord.com/api/webhooks/1436076640403984417/RgIvY87Cj2Nier35Icwb82UqRFbdi6hvx_ICrhknWsWdxQEp8BYeDtUftwPN_jVzZ1yW';
-
-// Przygotowanie payload
-$payload = [
-    'username' => 'Summer RP Bot',
-    'embeds' => [[
-        'title' => '📑 Wniosek o Zaświadczenie o Niekaralności',
-        'fields' => [
-            ['name'=>'Discord', 'value'=>$data['discord_nick']],
-            ['name'=>'Imię', 'value'=>$data['ic_name']],
-            ['name'=>'Nazwisko', 'value'=>$data['ic_surname']],
-            ['name'=>'PESEL / ID Roblox', 'value'=>$data['pesel']],
-            ['name'=>'Cel / powód', 'value'=>$data['reason']],
-        ],
-        'timestamp' => date(DATE_ATOM)
-    ]]
-];
-
-// Wyślij do Discorda
-$options = [
-    'http' => [
-        'header'  => "Content-Type: application/json\r\n",
-        'method'  => 'POST',
-        'content' => json_encode($payload),
-    ]
-];
-
-$result = file_get_contents($webhook, false, stream_context_create($options));
-
-if ($result === FALSE) {
-    http_response_code(500);
-    echo json_encode(['error'=>'Błąd wysyłki']);
-} else {
-    echo json_encode(['success'=>true]);
+// Przykładowa walidacja pól
+if (empty($data['name']) || empty($data['surname'])) {
+    echo json_encode(['success' => false, 'error' => 'Wszystkie pola są wymagane']);
+    exit;
 }
+
+// Tu możesz dodać zapis do bazy lub pliku
+// file_put_contents('requests.txt', json_encode($data) . PHP_EOL, FILE_APPEND);
+
+echo json_encode(['success' => true]);
+?>
