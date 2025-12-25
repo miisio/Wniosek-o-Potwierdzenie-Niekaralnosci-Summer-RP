@@ -10,11 +10,13 @@ form.addEventListener('submit', async (e) => {
     const data = Object.fromEntries(new FormData(form));
 
     try {
-        const res = await fetch('../backend/send.php', {
+        const res = await fetch('backend/send.php', { // poprawiona ścieżka
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
+
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 
         const result = await res.json();
 
@@ -29,7 +31,7 @@ form.addEventListener('submit', async (e) => {
 
     } catch (err) {
         msg.className = 'error';
-        msg.innerText = '❌ Błąd sieci.';
+        msg.innerText = '❌ Błąd sieci: ' + err.message;
     } finally {
         btn.disabled = false;
         btn.textContent = 'Wyślij wniosek';
